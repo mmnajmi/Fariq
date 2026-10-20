@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completely Fariq</title>
+    <style>
+        /* CSS Styling */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            background: #1e1e1e;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+        }
+
+        h1 {
+            color: #ff5252;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            min-height: 80px; /* Prevents layout shift during typing */
+            white-space: pre-line;
+        }
+
+        /* Interactive Strike-through Effect */
+        .strike {
+            text-decoration: line-through;
+            color: #757575;
+            transition: color 0.3s ease;
+        }
+
+        .cursor {
+            display: inline-block;
+            background-color: #e0e0e0;
+            animation: blink 1s infinite;
+            width: 10px;
+            height: 1.2rem;
+            margin-left: 2px;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="headline"></h1>
+        <p id="subtext"></p>
+    </div>
+
+    <!-- JavaScript for Dynamic Typing Effect -->
+    <script>
+        const line1 = "I am completely fariq.\n";
+        // Fixed: mushrooms changed to mafhooms
+        const line2 = "i have no purpose and i will not do the 500 mafhooms and 300 SLOs of Urdu and Pst miss.";
+        
+        const headlineElement = document.getElementById("headline");
+        const subtextElement = document.getElementById("subtext");
+
+        let i = 0;
+        let j = 0;
+
+        // Type out the main headline
+        function typeHeadline() {
+            if (i < line1.length) {
+                headlineElement.innerHTML += line1.charAt(i);
+                i++;
+                setTimeout(typeHeadline, 80); // Speed of typing line 1
+            } else {
+                // Add blinking cursor to the second line before typing starts
+                subtextElement.innerHTML = '<span id="typing-content"></span><span class="cursor"></span>';
+                setTimeout(typeSubtext, 500);
+            }
+        }
+
+        // Type out the main rant
+        function typeSubtext() {
+            const contentSpan = document.getElementById("typing-content");
+            if (j < line2.length) {
+                contentSpan.innerHTML += line2.charAt(j);
+                j++;
+                setTimeout(typeSubtext, 40); // Speed of typing line 2
+            } else {
+                // Highlight the tasks to look like a strike-through once typing finishes
+                setTimeout(() => {
+                    const originalText = contentSpan.innerHTML;
+                    // Fixed: Replaced text strings safely mapping mafhooms
+                    const highlighted = originalText.replace(
+                        "the 500 mafhooms and 300 SLOs of Urdu and Pst miss.", 
+                        "<span class='strike'>the 500 mafhooms and 300 SLOs of Urdu and Pst miss.</span> ❌"
+                    );
+                    contentSpan.innerHTML = highlighted;
+                }, 1000);
+            }
+        }
+
+        // Start the effect on page load
+        window.onload = typeHeadline;
+    </script>
+
+</body>
+</html>
